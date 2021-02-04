@@ -269,17 +269,17 @@ bool deleteFileOrFolder(const wstring& f2delete)
 	return (res == 0);
 };
 
-std::wstring getFileContent(const wchar_t *file2read)
+std::string getFileContentA(const char* file2read)
 {
-	if (!::PathFileExists(file2read))
-		return L"";
+	if (!::PathFileExistsA(file2read))
+		return "";
 
 	const size_t blockSize = 1024;
-	wchar_t data[blockSize];
-	std::wstring wholeFileContent = L"";
-	FILE *fp = _wfopen(file2read, L"rb");
+	char data[blockSize];
+	std::string wholeFileContent = "";
+	FILE *fp = fopen(file2read, "rb");
 	if(!fp)
-		return L"";
+		return "";
 
 	size_t lenFile = 0;
 	do
@@ -731,7 +731,7 @@ bool downloadBinary(const wstring& urlFrom, const wstring& destTo, const wstring
 	if (!sha2HashToCheck.empty())
 	{
 		char sha2hashStr[65] = { '\0' };
-		std::wstring content = getFileContent(destTo.c_str());
+		std::string content = getFileContentA(ws2s(destTo).c_str());
 		if (content.empty())
 		{
 			// Remove installed plugin
