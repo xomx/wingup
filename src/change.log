@@ -1,3 +1,4 @@
-WinGup (for Notepad++) v5.2.4 new feature:
+WinGup (for Notepad++) v5.2.5 new feature:
 
-1.  Make "Never" button showing mandatory in update dialog.
+1.  Make app DPI aware.
+2.  Add more translation.
