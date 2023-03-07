@@ -40,7 +40,7 @@
 
 		<!-- $MSGID_DOWNLOADPAGE$ and $MSGID_MOREINFO$ are place holders, don't translate them -->
 		<!-- <MSGID_GOTODOWNLOADPAGETEXT content="No update is available&#xD;or the newest version is not triggered yet for updating ($MSGID_MOREINFO$)&#xD;&#xD;$MSGID_DOWNLOADPAGE$ to update Notepad++ manually." /> -->
-		<MSGID_GOTODOWNLOADPAGETEXT content="Es ist kein Update verfügbar&#xD;oder die neuste Version wurde noch nicht für die Allgemeinheit freigegeben ($MSGID_MOREINFO$)&#xD;&#xD;$MSGID_DOWNLOADPAGE$ um Notepad++ manuell zu aktualisieren." />
+		<MSGID_GOTODOWNLOADPAGETEXT content="Es ist kein Update verfügbar&#xD;oder die neueste Version wurde noch nicht für die Allgemeinheit freigegeben ($MSGID_MOREINFO$)&#xD;&#xD;$MSGID_DOWNLOADPAGE$ um Notepad++ manuell zu aktualisieren." />
 
 		<!-- <MSGID_DOWNLOADSTOPPED content="Download is stopped by user. Update is aborted." /> -->
 		<MSGID_DOWNLOADSTOPPED  content="Das Herunterladen wurde durch den Benutzer gestoppt. Das Update wurde abgebrochen." />
