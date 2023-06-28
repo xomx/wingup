@@ -23,8 +23,8 @@
 <GUP_NativeLangue name="Swedish" version="5.1.3">
 	<PopupMessages>
 		<MSGID_UPDATEAVAILABLE content="Ett uppdateringspaket är tillgängligt. Vill du ladda ned det?" />
-		<MSGID_VERSIONCURRENT  content="Nuvarande version   :" />
-		<MSGID_VERSIONNEW      content="Tillgänglig version :" />
+		<MSGID_VERSIONCURRENT  content="Nuvarande version :" />
+		<MSGID_VERSIONNEW      content="Tillgänglig version   :" />
 		
 		<MSGID_DOWNLOADPAGE content="Gå till nedladdningssidan" />
 		<MSGID_MOREINFO content="mer information" />
