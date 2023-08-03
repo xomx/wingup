@@ -182,7 +182,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcurl_debug.lib;ZipLib.lib;zlib.lib;lzma.lib;bzip2.lib;comctl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\curl\builds\libcurl-vc14-x64-debug-dll-ipv6-sspi-schannel\lib;Bin\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\curl\builds\libcurl-vc15-ARM64-debug-dll-ipv6-sspi-schannel\lib;Bin\arm64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
