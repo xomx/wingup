@@ -31,6 +31,7 @@
 #include <shlwapi.h>
 #include "xmlTools.h"
 #include "sha-256.h"
+#include "dpiManager.h"
 
 #define CURL_STATICLIB
 #include "../curl/include/curl/curl.h"
@@ -41,6 +42,8 @@ typedef vector<wstring> ParamVector;
 
 HINSTANCE hInst;
 HHOOK g_hMsgBoxHook;
+
+DPIManager dpiManager;
 static HWND hProgressDlg;
 static HWND hProgressBar;
 static bool doAbort = false;
@@ -555,15 +558,21 @@ LRESULT CALLBACK progressBarDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARA
 	switch(Msg)
 	{
 		case WM_INITDIALOG:
+		{
 			hProgressDlg = hWndDlg;
+			int x = dpiManager.scaleX(20);
+			int y = dpiManager.scaleY(20);
+			int width = dpiManager.scaleX(280);
+			int height = dpiManager.scaleY(17);
 			hProgressBar = CreateWindowEx(0, PROGRESS_CLASS, NULL, WS_CHILD | WS_VISIBLE,
-										  20, 20, 280, 17,
-										  hWndDlg, NULL, hInst, NULL);
-			SendMessage(hProgressBar, PBM_SETRANGE, 0, MAKELPARAM(0, 100)); 
+				x, y, width, height,
+				hWndDlg, NULL, hInst, NULL);
+			SendMessage(hProgressBar, PBM_SETRANGE, 0, MAKELPARAM(0, 100));
 			SendMessage(hProgressBar, PBM_SETSTEP, 1, 0);
 			DlgIconHelper::setIcon(hProgressDlg, appIconFile);
 			goToScreenCenter(hWndDlg);
-			return TRUE; 
+			return TRUE;
+		}
 
 		case WM_COMMAND:
 			switch(wParam)
