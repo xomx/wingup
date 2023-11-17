@@ -1,4 +1,4 @@
-WinGup (for Notepad++) v5.2.6 new feature:
+WinGup (for Notepad++) v5.2.7 fixed bug:
 
-1.  Update to curl 8.2.1 .
-2.  Fix progress bar visual glitchy in High DPI environment.
+1.  Update to curl 8.4 for fixing vulnerability (CVE-2023-38545).
+
