@@ -1,5 +1,5 @@
 /*
- Copyright 2023 Don HO <don.h@free.fr>
+ Copyright 2024 Don HO <don.h@free.fr>
 
  This file is part of GUP.
 
@@ -19,8 +19,8 @@
 
 #pragma once
 
-#define VERSION_VALUE L"5.27\0"
-#define VERSION_DIGITALVALUE 5, 2, 7, 0
+#define VERSION_VALUE L"5.28\0"
+#define VERSION_DIGITALVALUE 5, 2, 8, 0
 
 #define IDD_PROGRESS_DLG 1001
 #define IDD_PROXY_DLG 1002
