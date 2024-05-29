@@ -72,7 +72,7 @@ END
 IDD_YESNONEVERDLG DIALOGEX 0, 0, 270, 94
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
-CAPTION "Update available"
+CAPTION "Notepad++ Update Available"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT "An update package is available, do you want to download it?",IDC_YESNONEVERMSG,15,15,250,64
