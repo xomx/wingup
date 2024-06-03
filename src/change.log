@@ -1,4 +1,4 @@
-WinGup (for Notepad++) v5.2.8 fixed bug:
+WinGup (for Notepad++) v5.2.9 fixed bug:
 
-1. Fix updates fail behind proxies that require NTLM authentication.
+1. Fix update popup dialog not indicate "Notepad++".
 
