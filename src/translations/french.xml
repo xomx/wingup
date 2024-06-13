@@ -22,7 +22,7 @@
 
 <GUP_NativeLangue name="français" version="5.1.3">
 	<PopupMessages>
-		<MSGID_UPDATEAVAILABLE content="Une mise à jour est disponible, voulez-vous le télécharger?"/>
+		<MSGID_UPDATEAVAILABLE content="Une mise à jour est disponible, voulez-vous la télécharger et l'installer?"/>
 		
 		<MSGID_DOWNLOADPAGE content="Aller à la page de téléchargement" />
 		<MSGID_MOREINFO content="plus d'info" />

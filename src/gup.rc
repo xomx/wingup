@@ -75,10 +75,11 @@ EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
 CAPTION "Notepad++ Update Available"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    LTEXT "An update package is available, do you want to download it?",IDC_YESNONEVERMSG,15,15,250,64
-    PUSHBUTTON   "Yes",IDYES,50,70,50,14
-    PUSHBUTTON   "No",IDNO,110,70,50,14
-    PUSHBUTTON   "Never",IDCANCEL,170,70,50,14
+    LTEXT "An update package is available, do you want to download and install it?",IDC_YESNONEVERMSG,15,15,250,50
+    PUSHBUTTON      "Yes",IDYES,27,70,50,14
+    PUSHBUTTON      "Yes (Silent)",IDOK,82,70,50,14
+    PUSHBUTTON      "No",IDNO,136,70,50,14
+    PUSHBUTTON      "Never",IDCANCEL,190,70,50,14
 END
 
 IDD_UPDATE_DLG DIALOGEX 0, 0, 200, 110

@@ -55,6 +55,10 @@ static long proxyPort  = 0;
 static wstring winGupUserAgent = L"WinGup/";
 static wstring dlFileName = L"";
 static wstring appIconFile = L"";
+static wstring nsisSilentInstallParam = L"";
+
+const wchar_t FLAG_NSIS_SILENT_INSALL_PARAM[] = L"/closeRunningNpp /S /runNppAfterSilentInstall";
+
 
 const wchar_t FLAG_OPTIONS[] = L"-options";
 const wchar_t FLAG_VERBOSE[] = L"-verbose";
@@ -62,7 +66,7 @@ const wchar_t FLAG_HELP[] = L"--help";
 const wchar_t FLAG_UUZIP[] = L"-unzipTo";
 const wchar_t FLAG_CLEANUP[] = L"-clean";
 
-const wchar_t MSGID_UPDATEAVAILABLE[] = L"An update package is available, do you want to download it?";
+const wchar_t MSGID_UPDATEAVAILABLE[] = L"An update package is available, do you want to download and install it?";
 const wchar_t MSGID_VERSIONCURRENT[] = L"Current version is   :";
 const wchar_t MSGID_VERSIONNEW[] = L"Available version is :";
 const wchar_t MSGID_DOWNLOADSTOPPED[] = L"Download is stopped by user. Update is aborted.";
@@ -577,21 +581,21 @@ LRESULT CALLBACK progressBarDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARA
 		case WM_COMMAND:
 			switch(wParam)
 			{
-			case IDOK:
-				EndDialog(hWndDlg, 0);
-				return TRUE;
-			case IDCANCEL:
-				stopDL = true;
-				if (abortOrNot == L"")
-					abortOrNot = MSGID_ABORTORNOT;
-				int abortAnswer = ::MessageBox(hWndDlg, abortOrNot.c_str(), msgBoxTitle.c_str(), MB_YESNO);
-				if (abortAnswer == IDYES)
-				{
-					doAbort = true;
+				case IDOK:
 					EndDialog(hWndDlg, 0);
-				}
-				stopDL = false;
-				return TRUE;
+					return TRUE;
+				case IDCANCEL:
+					stopDL = true;
+					if (abortOrNot == L"")
+						abortOrNot = MSGID_ABORTORNOT;
+					int abortAnswer = ::MessageBox(hWndDlg, abortOrNot.c_str(), msgBoxTitle.c_str(), MB_YESNO);
+					if (abortAnswer == IDYES)
+					{
+						doAbort = true;
+						EndDialog(hWndDlg, 0);
+					}
+					stopDL = false;
+					return TRUE;
 			}
 			break;
 	}
@@ -622,6 +626,7 @@ LRESULT CALLBACK yesNoNeverDlgProc(HWND hWndDlg, UINT message, WPARAM wParam, LP
 		{
 			switch (wParam)
 			{
+				case IDOK:
 				case IDYES:
 				case IDNO:
 				case IDCANCEL:
@@ -978,8 +983,9 @@ bool runInstaller(const wstring& app2runPath, const wstring& binWindowsClassName
 		}
 	}
 
+
 	// execute the installer
-	HINSTANCE result = ::ShellExecute(NULL, L"open", app2runPath.c_str(), L"", L".", SW_SHOW);
+	HINSTANCE result = ::ShellExecute(NULL, L"open", app2runPath.c_str(), nsisSilentInstallParam.c_str(), L".", SW_SHOW);
 
 	if (result <= (HINSTANCE)32) // There's a problem (Don't ask me why, ask Microsoft)
 	{
@@ -1405,6 +1411,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR lpszCmdLine, int)
 			}
 			return 0;
 		}
+		else if (dlAnswer == IDOK)
+		{
+			nsisSilentInstallParam = FLAG_NSIS_SILENT_INSALL_PARAM;
+		}
+		// else IDYES: do nothing
 
 		//
 		// Download executable bin
