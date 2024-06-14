@@ -538,7 +538,7 @@ static size_t setProgress(HWND, double dlTotal, double dlSoFar, double, double)
 
 	if (dlTotal != 0)
 	{
-		size_t step = size_t(dlSoFar * 100.0 / dlTotal - downloadedRatio);
+		size_t step = size_t((dlSoFar * 100.0 / dlTotal) - downloadedRatio);
 
 		SendMessage(hProgressBar, PBM_SETSTEP, (WPARAM)step, 0);
 		SendMessage(hProgressBar, PBM_STEPIT, 0, 0);
@@ -548,6 +548,10 @@ static size_t setProgress(HWND, double dlTotal, double dlSoFar, double, double)
 	wchar_t percentage[percentageLen];
 	swprintf(percentage, percentageLen, L"Downloading %s: %Iu %%", dlFileName.c_str(), downloadedRatio);
 	::SetWindowText(hProgressDlg, percentage);
+
+	if (downloadedRatio == 100)
+		SendMessage(hProgressDlg, WM_COMMAND, IDOK, 0);
+
 	return 0;
 };
 
@@ -584,6 +588,7 @@ LRESULT CALLBACK progressBarDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARA
 				case IDOK:
 					EndDialog(hWndDlg, 0);
 					return TRUE;
+
 				case IDCANCEL:
 					stopDL = true;
 					if (abortOrNot == L"")
@@ -967,7 +972,7 @@ bool runInstaller(const wstring& app2runPath, const wstring& binWindowsClassName
 
 		if (h)
 		{
-			int installAnswer = ::MessageBox(NULL, closeMsg.c_str(), closeMsgTitle.c_str(), MB_YESNO);
+			int installAnswer = ::MessageBox(h, closeMsg.c_str(), closeMsgTitle.c_str(), MB_YESNO | MB_APPLMODAL);
 
 			if (installAnswer == IDNO)
 			{
