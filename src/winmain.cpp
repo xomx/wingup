@@ -57,7 +57,7 @@ static wstring dlFileName = L"";
 static wstring appIconFile = L"";
 static wstring nsisSilentInstallParam = L"";
 
-const wchar_t FLAG_NSIS_SILENT_INSALL_PARAM[] = L"/closeRunningNpp /S /runNppAfterSilentInstall";
+const wchar_t FLAG_NSIS_SILENT_INSTALL_PARAM[] = L"/closeRunningNpp /S /runNppAfterSilentInstall";
 
 
 const wchar_t FLAG_OPTIONS[] = L"-options";
@@ -1413,7 +1413,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR lpszCmdLine, int)
 		}
 		else if (dlAnswer == IDOK)
 		{
-			nsisSilentInstallParam = FLAG_NSIS_SILENT_INSALL_PARAM;
+			nsisSilentInstallParam = FLAG_NSIS_SILENT_INSTALL_PARAM;
 		}
 		// else IDYES: do nothing
 
