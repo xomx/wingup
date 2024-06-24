@@ -26,7 +26,7 @@
 
 <GUP_NativeLangue name="Čeština" version="5.1.3">
 	<PopupMessages>
-		<MSGID_UPDATEAVAILABLE content="Je dostupná aktualizace, chcete si jí stáhnout?" />
+		<MSGID_UPDATEAVAILABLE content="Je dostupná aktualizace, chcete si jí stáhnout a nainstalovat?" />
 		<MSGID_VERSIONCURRENT  content="Aktuální verze je:" />
 		<MSGID_VERSIONNEW      content="Dostupná verze je:" />
 		
