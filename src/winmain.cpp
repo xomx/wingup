@@ -97,7 +97,6 @@ gup -unzipTo [-clean] FOLDER_TO_ACTION ZIP_URL\r\
     ZIP_URL: The URL to download zip file.\r\
     FOLDER_TO_ACTION: The folder where we clean or/and unzip to.\r\
 	";
-std::wstring thirdDoUpdateDlgButtonLabel;
 
 class DlgIconHelper
 {
@@ -608,6 +607,15 @@ LRESULT CALLBACK progressBarDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARA
 	return FALSE;
 }
 
+struct UpdateAvailableDlgStrings
+{
+	wstring _title;
+	wstring _message;
+	wstring _customButton;
+	wstring _yesButton;
+	wstring _yesSilentButton;
+	wstring _noButton;
+};
 
 LRESULT CALLBACK yesNoNeverDlgProc(HWND hWndDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -615,12 +623,23 @@ LRESULT CALLBACK yesNoNeverDlgProc(HWND hWndDlg, UINT message, WPARAM wParam, LP
 	{
 		case WM_INITDIALOG:
 		{
-			if (thirdDoUpdateDlgButtonLabel != L"")
-				::SetDlgItemText(hWndDlg, IDCANCEL, thirdDoUpdateDlgButtonLabel.c_str());
-
 			if (lParam)
 			{
-				::SetDlgItemText(hWndDlg, IDC_YESNONEVERMSG, (LPCWSTR)lParam);
+				UpdateAvailableDlgStrings* pUaDlgStrs = reinterpret_cast<UpdateAvailableDlgStrings*>(lParam);
+
+				if (!(pUaDlgStrs->_message).empty())
+					::SetDlgItemText(hWndDlg, IDC_YESNONEVERMSG, pUaDlgStrs->_message.c_str());
+				if (!(pUaDlgStrs->_title).empty())
+					::SetWindowText(hWndDlg, pUaDlgStrs->_title.c_str());
+
+				if (!pUaDlgStrs->_customButton.empty())
+					::SetDlgItemText(hWndDlg, IDCANCEL, pUaDlgStrs->_customButton.c_str());
+				if (!pUaDlgStrs->_yesButton.empty())
+					::SetDlgItemText(hWndDlg, IDYES, pUaDlgStrs->_yesButton.c_str());
+				if (!pUaDlgStrs->_yesSilentButton.empty())
+					::SetDlgItemText(hWndDlg, IDOK, pUaDlgStrs->_yesSilentButton.c_str());
+				if (!pUaDlgStrs->_noButton.empty())
+					::SetDlgItemText(hWndDlg, IDNO, pUaDlgStrs->_noButton.c_str());
 			}
 
 			goToScreenCenter(hWndDlg);
@@ -1380,7 +1399,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR lpszCmdLine, int)
 		// Process Update Info
 		//
 
-		// Ask user if he/she want to do update
+		// Ask if user wants to do update
+
+		UpdateAvailableDlgStrings uaDlgStrs;
+		uaDlgStrs._title = nativeLang.getMessageString("MSGID_UPDATETITLE");
+
+
 		wstring updateAvailable = nativeLang.getMessageString("MSGID_UPDATEAVAILABLE");
 		if (updateAvailable.empty())
 			updateAvailable = MSGID_UPDATEAVAILABLE;
@@ -1398,10 +1422,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR lpszCmdLine, int)
 		updateAvailable += L"\n\n" + versionCurrent;
 		updateAvailable += L"\n" + versionNew;
 		
-		thirdDoUpdateDlgButtonLabel = gupParams.get3rdButtonLabel();
+		uaDlgStrs._message = updateAvailable;
+
+		uaDlgStrs._customButton = nativeLang.getMessageString("MSGID_UPDATENEVER");
+		uaDlgStrs._yesButton = nativeLang.getMessageString("MSGID_UPDATEYES");
+		uaDlgStrs._yesSilentButton = nativeLang.getMessageString("MSGID_UPDATEYESSILENT");
+		uaDlgStrs._noButton = nativeLang.getMessageString("MSGID_UPDATENo");
 
 		int dlAnswer = 0;
-		dlAnswer = static_cast<int32_t>(::DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_YESNONEVERDLG), hApp, reinterpret_cast<DLGPROC>(yesNoNeverDlgProc), (LPARAM)updateAvailable.c_str()));
+		dlAnswer = static_cast<int32_t>(::DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_YESNONEVERDLG), hApp, reinterpret_cast<DLGPROC>(yesNoNeverDlgProc), (LPARAM)&uaDlgStrs));
 
 		if (dlAnswer == IDNO)
 		{
