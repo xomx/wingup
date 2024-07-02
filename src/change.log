@@ -1,4 +1,6 @@
-WinGup (for Notepad++) v5.2.9 fixed bug:
+WinGup (for Notepad++) v5.3 fixed bug:
 
-1. Fix update popup dialog not indicate "Notepad++".
+1. Add an option to update silently.
+2. Fix 100% download progress bar remains issue.
+3. More translatable items.
 
