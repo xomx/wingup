@@ -42,7 +42,7 @@ static void unit_stop(void)
 
 }
 
-#if defined(MSDOS) || defined(WIN32)
+#if defined(_WIN32) || defined(MSDOS)
 
 static char *getflagstr(int flags)
 {
@@ -201,9 +201,9 @@ UNITTEST_START
     { "COM56", 0,
       "COM56", SANITIZE_ERR_OK
     },
-    /* At the moment we expect a maximum path length of 259. I assume MSDOS
+    /* At the moment we expect a maximum path length of 259. I assume MS-DOS
        has variable max path lengths depending on compiler that are shorter
-       so currently these "good" truncate tests won't run on MSDOS */
+       so currently these "good" truncate tests will not run on MS-DOS */
 #ifndef MSDOS
     { "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
       "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
@@ -353,6 +353,6 @@ UNITTEST_START
 {
   fprintf(stderr, "Skipped test not for this platform\n");
 }
-#endif /* MSDOS || WIN32 */
+#endif /* _WIN32 || MSDOS */
 
 UNITTEST_STOP

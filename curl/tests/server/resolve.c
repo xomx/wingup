@@ -38,16 +38,13 @@
 #include <netinet/in.h>
 #endif
 #ifdef _XOPEN_SOURCE_EXTENDED
-/* This define is "almost" required to build on HPUX 11 */
+/* This define is "almost" required to build on HP-UX 11 */
 #include <arpa/inet.h>
 #endif
 #ifdef HAVE_NETDB_H
 #include <netdb.h>
 #endif
 
-#define ENABLE_CURLX_PRINTF
-/* make the curlx header define all printf() functions to use the curlx_*
-   versions instead */
 #include "curlx.h" /* from the private lib dir */
 #include "util.h"
 
@@ -102,7 +99,7 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-#ifdef WIN32
+#ifdef _WIN32
   win32_init();
   atexit(win32_cleanup);
 #endif
