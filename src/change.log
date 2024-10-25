@@ -1,6 +1,4 @@
-WinGup (for Notepad++) v5.3 fixed bug:
+WinGup (for Notepad++) v5.3.1 fixed bug:
 
-1. Add an option to update silently.
-2. Fix 100% download progress bar remains issue.
-3. More translatable items.
+1. Update cURL in Notepad++ updater (WinGUp) for fixing cURL's CVE-2024-7264 issue.
 
